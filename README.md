@@ -24,6 +24,32 @@ Windows 桌面端工具，用本地程序管理自己在智慧树平台上的学
 
 系统要求：Windows 10 / 11（64 位）。卸载在「Windows 设置 → 应用」中完成，不会自动删除本地数据目录。
 
+## 浏览器用户脚本（可选）
+
+仓库另附一个只作用于网页版的用户脚本 [`userscript/zhihuishu-helper.user.js`](./userscript/zhihuishu-helper.user.js)，与桌面端相互独立，不需要安装本应用。
+
+| 页面 | 行为 |
+| --- | --- |
+| `onlineexamh5new.zhihuishu.com/stuExamWeb.html` | 共享课作业：抓包解析题目 |
+| `*.hiexam.zhihuishu.com/atHomeworkExam/` | 翻转课作业：遍历抓取题目 |
+| `chat.deepseek.com` | 后台工作页：接收题目、回传答案 JSON |
+
+工作方式：作业页把题目与提示词写入脚本存储，脚本自动开一个 DeepSeek 后台标签页答题，解析出答案后回传并自动填写；后台页空闲一段时间会自动关闭。
+
+**安装**
+
+1. 先安装用户脚本管理器：Tampermonkey 或 脚本猫（ScriptCat）。
+2. 打开脚本地址（任选其一）：
+   - jsDelivr（国内更快）：`https://cdn.jsdelivr.net/gh/feng161110/zhihuishu-desktop@main/userscript/zhihuishu-helper.user.js`
+   - GitHub：`https://github.com/feng161110/zhihuishu-desktop/blob/main/userscript/zhihuishu-helper.user.js?raw=true`
+3. 管理器识别到 `==UserScript==` 头后点击「安装」。
+
+**自动更新**
+
+脚本头里的 `@updateURL` / `@downloadURL` 指向 jsDelivr 的 `main` 分支，管理器会按 `@version` 周期性检查更新。本仓库改动版本号并推送后，已安装的脚本会提示升级。jsDelivr 对分支地址有缓存（通常几小时），需要立刻生效时可访问 `https://purge.jsdelivr.net/gh/feng161110/zhihuishu-desktop@main/userscript/zhihuishu-helper.user.js` 刷新缓存。
+
+脚本依赖浏览器里已登录的 DeepSeek 账号，答题质量取决于模型输出，**不保证正确率**；用 AI 代做作业存在学术诚信与平台规则风险，请自行判断并承担后果。
+
 ## 界面与设置
 
 - 底部控制条：倍速（1.0–3.0，播放中锁定）、严格 100%、自动识别验证码、开始 / 暂停 / 继续 / 停止。
@@ -73,6 +99,7 @@ Windows 桌面端工具，用本地程序管理自己在智慧树平台上的学
 │  ├─ src/                  App、hooks/useWorkspace（数据层）、components
 │  └─ src-tauri/            Tauri 2 外壳（Rust）：拉起与清理后端、窗口
 ├─ scripts/                 build_backend.py（PyInstaller）、gen_icons.py
+├─ userscript/              zhihuishu-helper.user.js（浏览器用户脚本）
 └─ 使用说明与免责声明.md
 ```
 
