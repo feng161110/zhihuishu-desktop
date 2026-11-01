@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# 前端
+node_modules/
+dist/
+.vite/
+
+# Tauri
+frontend/src-tauri/target/
+frontend/src-tauri/gen/schemas/
+
+# 构建产物（由 scripts/build_backend.py 与 tauri build 生成，不入库）
+build/
+backend/bin/
+*.spec
+
+# 本地验证码调试脚本及其产物，不入库
+/1.py
+_captcha.html
+_captcha.png
+
+# IDE
+.idea/
+
+# 本地数据
+*.log

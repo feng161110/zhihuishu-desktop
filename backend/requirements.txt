@@ -1,0 +1,10 @@
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+requests>=2.31
+pillow>=10.0
+numpy>=1.26
+pycryptodome>=3.20
+
+# 滑块自动识别（自动模式必需；缺失时仍可在界面手动拖动）
+captcha-recognizer>=0.1.2
